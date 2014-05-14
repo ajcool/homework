@@ -1,0 +1,10 @@
+I have implemented the structure defined in the blog post without using a
+database. When reading the post, the only thing that I could think of to test
+was the organizations that are visible to a given user. On the user model, I
+implemented an #organizations method that takes an optional role_type variable.
+If passed in, it will limit the organizations to those where the user has that
+role_type. An organization that a user has a denied role on will never appear
+in the list.
+
+To run the tests, make sure you are using ruby 2.0.0 and have the gem rspec
+installed and run 'rspec spec.rb'
