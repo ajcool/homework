@@ -1,0 +1,8 @@
+Hireology Homework Part 2 Question 1
+
+To process a file, run 'ruby process.rb <input_file> <output_file[OPTIONAL]>'.
+I used ruby 2.0.0, so for best results, use that. If you do not specify an
+output file, the result will output to the terminal.
+
+To run the tests, ensure you have the gem rspec installed, then run
+'rspec processor_spec.rb'.

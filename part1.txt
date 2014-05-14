@@ -1,0 +1,33 @@
+1. Memcache can improve a site's performance by caching certain frequent
+   database calls to alleviate strain on the database server. Memcache is very
+   fast, so it will speed up requests that hit the cache, but it also reduces
+   traffic to the database, so other requests will not have to wait as long.
+
+   When used in a multi-node configuration, Memcache will decide which server
+   to store a bit of data on based on the cache key. Ideally, this will
+   distribute the traffic between the Memcache servers.
+
+2. The first thing that comes to mind when I look at the controller is that it
+   is long and there appears to be some repeated segments. I would improve that
+   by refactoring some of that code out of the if...else block that it is in.
+   Specifically, the large if...else blocks that determine the sort order of
+   the candidates could probably be pulled out and simplified. I would replace
+   it with a case statement and find a way to put it outside of the
+   "if current_user.has_permission?('view_candidates')" section and also use it
+   in the else section of that same block. The order is the same no matter
+   whether the current user has permission or not. This would simplify the 'if'
+   section to one line
+
+   The else portion of the outermost if...else block is very long and involved
+   and could use some comments or some clean up. There are many nested
+   if...else and each blocks, making the code very difficult to read. I feel
+   like the needed data could be acquired in a simpler fashion, possibly by
+   moving some of this logic to the models. I am not certain of how the models
+   are set up, but this section seems pretty complicated. From what I can
+   ascertain, User has many JobContacts, JobContact belongs to Job, Job has
+   many CandidateJobs, and CandidateJob belongs to Candidate. It may be that
+   this is the easiest way to get the Candidates that a User can see, but I
+   would try to reduce the number of nested blocks by introducing model methods
+   or using built-in array methods in some places. If it isn't possible to
+   change the code, I would include some comments to make it more obvious what
+   the code is doing.
